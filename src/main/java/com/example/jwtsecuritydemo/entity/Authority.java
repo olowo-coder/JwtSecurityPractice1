@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,6 +29,9 @@ public class Authority implements GrantedAuthority {
     private Long id;
     private String roleCode;
     private String roleDescription;
+
+    @ManyToMany(mappedBy = "authorities")
+    private Set<Users> usersSet;
 
 
     @Override

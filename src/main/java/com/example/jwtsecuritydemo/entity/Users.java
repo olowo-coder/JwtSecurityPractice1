@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.*;
 import java.util.Date;
 import java.util.List;
 
@@ -42,15 +42,15 @@ public class Users implements UserDetails {
 
 
     @ManyToMany(
-            cascade = CascadeType.PERSIST
-//            fetch = FetchType.EAGER
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     @JoinTable(
-            name = "Authority",
-            joinColumns = @JoinColumn(referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+            name = "Auth_user_Authority",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
-    private List<Authority> authorities;
+    private Set<Authority> authorities = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

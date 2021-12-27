@@ -10,7 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class JwtSecurityDemoApplication {
@@ -27,29 +29,40 @@ public class JwtSecurityDemoApplication {
         SpringApplication.run(JwtSecurityDemoApplication.class, args);
     }
 
-    @PostConstruct
-    protected void init(){
-        List<Authority> authorityList = new ArrayList<>();
-        authorityList.add(createAuthority("USER","user role"));
-        authorityList.add(createAuthority("ADMIN", "admin role"));
-
-        Users user = new Users();
-        user.setUsername("olowo123");
-        user.setFirstName("olowo");
-        user.setLastName("ben");
-        user.setPassword(passwordEncoder.encode("lanre"));
-        user.setEnabled(true);
+//    @PostConstruct
+//    protected void init(){
+//        Set<Authority> authorityList = new HashSet<>();
+//        authorityList.add(createAuthority("USER","user role"));
+//        authorityList.add(createAuthority("ADMIN", "admin role"));
+//
+//        Users user = new Users();
+//        user.setUsername("olowo123");
+//        user.setFirstName("olowo");
+//        user.setLastName("ben");
+//        user.setPassword(passwordEncoder.encode("lanre"));
+//        user.setEnabled(true);
 //        user.setAuthorities(authorityList);
+//
+//
+//        usersRepository.save(user);
+//
+//    }
+//
+//    private Authority createAuthority(String role, String roleDescription){
+//        Authority authority = new Authority();
+//        authority.setRoleCode(role);
+//        authority.setRoleDescription(roleDescription);
+//        return authority;
+//    }
 
-        usersRepository.save(user);
 
-    }
-
-    private Authority createAuthority(String role, String roleDescription){
-        Authority authority = new Authority();
-        authority.setRoleCode(role);
-        authority.setRoleDescription(roleDescription);
-        return authority;
-    }
+//    {
+//        "username": "mary090",
+//            "firstName": "micheals",
+//            "lastName": "mary",
+//            "password": "lock",
+//            "email": "mary@email.com",
+//            "enabled":true
+//    }
 
 }
